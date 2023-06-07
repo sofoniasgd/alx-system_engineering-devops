@@ -1,1 +1,0 @@
-this is the readme inside the project folder
