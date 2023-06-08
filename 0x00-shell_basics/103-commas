@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -amF
+echo -e '\n'`(ls -aFm --file-type)`'\n' 
