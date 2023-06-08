@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e "\n" $(ls -apmd [[:alnum:]]*) "\n" 
+echo -e "\n" $(ls -apm) "\n" 
