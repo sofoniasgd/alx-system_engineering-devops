@@ -1,2 +1,13 @@
-#!/bin/bash
-tail /etc/passwd
+total 44
+4 -rwxr-xr-x 1 root root  30 Jun 12 13:37 0-hello_world
+4 -rwxr-xr-x 1 root root  29 Jun 12 13:38 1-confused_smiley
+4 -rwxr-xr-x 1 root root  28 Jun 12 13:38 2-hellofile
+4 -rwxr-xr-x 1 root root  39 Jun 12 13:39 3-twofiles
+4 -rwxr-xr-x 1 root root  29 Jun 12 13:39 4-lastlines
+4 -rwxr-xr-x 1 root root  29 Jun 12 13:39 5-firstlines
+4 -rwxr-xr-x 1 root root  36 Jun 12 13:39 6-third_line
+4 -rwxr-xr-x 1 root root  32 Jun 12 13:39 gp
+4 -rw-r--r-- 1 root root 800 Jun 12 13:39 iacta
+4 -rw-r--r-- 1 root root  26 Jun 12 13:39 README.md
+4 -rwxr-xr-x 1 root root  29 Jun 12 13:39 t
+0 -rwxr-xr-x 1 root root   0 Jun 12 13:43 tmp

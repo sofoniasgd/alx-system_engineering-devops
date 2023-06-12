@@ -1,0 +1,18 @@
+total 52
+drwxr-xr-x 2 root root 259 Jun 12 13:46 .
+drwxr-xr-x 6 sofi sofi 149 Jun 12 04:36 ..
+-rwxr-xr-x 1 root root  30 Jun 12 13:37 0-hello_world
+-rwxr-xr-x 1 root root  29 Jun 12 13:38 1-confused_smiley
+-rwxr-xr-x 1 root root  28 Jun 12 13:38 2-hellofile
+-rwxr-xr-x 1 root root  39 Jun 12 13:39 3-twofiles
+-rwxr-xr-x 1 root root  29 Jun 12 13:39 4-lastlines
+-rwxr-xr-x 1 root root  29 Jun 12 13:39 5-firstlines
+-rwxr-xr-x 1 root root  36 Jun 12 13:39 6-third_line
+-rwxr--r-- 1 root root  36 Jun 12 13:44 8-cwd_state
+-rwxr-xr-x 1 root root  32 Jun 12 13:39 gp
+-rw-r--r-- 1 root root 800 Jun 12 13:39 iacta
+-rw-r--r-- 1 root root   0 Jun 12 13:46 ls_cwd_content
+-rw-r--r-- 1 root root  26 Jun 12 13:39 README.md
+-rwxr-xr-x 1 root root  29 Jun 12 13:39 t
+-rw-r--r-- 1 root root   0 Jun 12 13:46 t2
+-rwxr-xr-x 1 root root 631 Jun 12 13:43 tmp
