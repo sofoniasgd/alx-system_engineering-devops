@@ -1,0 +1,2 @@
+#!/bin/bash
+echo chicago | sed 's/c//g'
