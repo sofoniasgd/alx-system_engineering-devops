@@ -1,0 +1,1 @@
+this is the readme inside 0x03-shell variablesand expantions project
