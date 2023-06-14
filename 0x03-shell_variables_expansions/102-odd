@@ -1,2 +1,2 @@
 #!/bin/bash
-perl -ne 'print if($.%2)' list
+perl -ne 'print if($.%2==1)'
