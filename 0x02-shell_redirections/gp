@@ -1,3 +1,4 @@
 #!/bin/bash
 git add .
-git commit
+git commit -m "&var1"
+git push
