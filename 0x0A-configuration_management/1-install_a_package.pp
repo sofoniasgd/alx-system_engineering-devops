@@ -1,4 +1,3 @@
-#!/usr/bin/pup
 # install flask using pip
 package { 'flask':
 ensure   => '2.1.0',
