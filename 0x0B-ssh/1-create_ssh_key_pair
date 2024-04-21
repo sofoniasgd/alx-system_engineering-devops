@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# creates a new private/publick key pair 4096 bits key=school pass=betty
+ssh-keygen -t rsa -b 4096 -f school -N "betty"
