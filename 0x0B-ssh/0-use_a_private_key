@@ -1,2 +1,3 @@
-#!/bin/bash
+#!/bin/env bash
+# connects to my server at 52.3.240.162 with my private key in ~/.ssh/school
 ssh -i ~/.ssh/school ubuntu@52.3.240.162
