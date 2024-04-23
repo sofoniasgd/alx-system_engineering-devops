@@ -10,7 +10,6 @@ if [ "$argcount" -lt 3 ]; then
 	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
 	exit
 fi
-echo "$argcount"
 
 # turning off strict host key checking
 if [ -f ~/.ssh/config ]; then
