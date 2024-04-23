@@ -16,3 +16,4 @@ sudo ufw allow 'Nginx HTTP'
 # return a page that contains the string Hello World! when querying at root
 # by modifying the default nginx landing page
 echo "Hello world!" | sudo tee /var/www/html/index.nginx-debian.html
+service nginx start
