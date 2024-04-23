@@ -11,12 +11,6 @@ if [ "$argcount" -lt 3 ]; then
 	exit
 fi
 
-# turning off strict host key checking
-if [ -f ~/.ssh/config ]; then
-	echo "StrictHostKeyChecking no" >> ~/.ssh/config
-else
-	echo "StrictHostKeyChecking no" > ~/.ssh/config
-fi
 # format "scp -i key_path source_path username@ip:destination_path"
 # 	 "scp -i    $4 		$1		$3@$2:~/
-scp -i "$4" "$1" "$3@$2:~/"
+scp -o StrictHostKeyChecking=no -i "$4" "$1" "$3@$2:~"
