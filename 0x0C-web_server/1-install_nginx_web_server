@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Configure a new Ubuntu machine with Nginx installation
+# requirements:
+# 	install it on my web server
+#	it should listen on port 80
+#	GET at its root should return a page with(Hello World!) text
+# !!no use of systemctl!! :(
+
+# install nginx(enginex)
+sudo apt-get -y update
+sudo apt -y install nginx
+
+# configure firewall to allow normal unencrypted traffic
+# this opens only port 80
+sudo ufw allow 'Nginx HTTP'
+# return a page that contains the string Hello World! when querying at root
+# by modifying the default nginx landing page
+echo "Hello world!" | sudo tee /var/www/html/index.nginx-debian.html
