@@ -19,5 +19,4 @@ else
 fi
 # format "scp -i key_path source_path username@ip:destination_path"
 # 	 "scp -i    $4 		$1		$3@$2:~/
-echo "scp $4 $1 $3@$2:~/"
 scp -i "$4" "$1" "$3@$2:~/"
