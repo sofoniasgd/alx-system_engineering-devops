@@ -1,30 +1,25 @@
 #!/usr/bin/env bash
-# Installs, configures, and starts the server
-apt-get update
-apt-get -y install nginx
+# Configure a new Ubuntu machine with Nginx installation
+# requirements:
+# 	install it on my web server
+#	it should listen on port 80
+#	GET at its root should return a page with(Hello World!) text
+# !!no use of systemctl!! :(
+
+# install nginx(enginex)
+sudo apt-get -y update
+sudo apt -y install nginx
+
+# configure firewall to allow normal unencrypted traffic
+# this opens only port 80
 sudo ufw allow 'Nginx HTTP'
-mkdir -p /var/www/html/
-sudo chmod -R 755 /var/www
-echo 'Hello World!' > /var/www/html/index.html
-SERVER_CONFIG=\
-"server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
-	index index.html index.htm index.nginx-debian.html;
-	server_name _;
-	location / {
-		try_files \$uri \$uri/ =404;
-	}
-	if (\$request_filename ~ redirect_me){
-		rewrite ^ https://sketchfab.com/bluepeno/models permanent;
-	}
-}"
+# return a page that contains the string Hello World! when querying at root
+# by modifying the default nginx landing page
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 
-bash -c "echo -e '$SERVER_CONFIG' > /etc/nginx/sites-enabled/default"
+# ++ Redirection- redirect /redirect_me page to sth else
 
-if [ "$(pgrep -c nginx)" -le 0 ]; then
-	service nginx start
-else
-	service nginx restart
-fi
+other_place = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+line = "rewrite ^/redirect_me$ $other_place permanent;"
+sed -i "/root /var/www/html/a\$line"
+service nginx start

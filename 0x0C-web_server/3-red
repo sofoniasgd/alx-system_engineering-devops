@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+other_place="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+line="rewrite ^/redirect_me$ $other_place permanent;"
+echo "$line"
+file="/etc/nginx/sites-available/default"
+line_no=$(sed -n '/root \/var\/www\/html;/=' $file)
+echo "$line_no"
+
+sed  "${line_no}a\\$line" /etc/nginx/sites-available/default > tmp
+mv tmp /etc/nginx/sites-available/default
+# service nginx start
