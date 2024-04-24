@@ -9,4 +9,4 @@ echo "$line_no"
 
 sed  "${line_no}a\\$line" /etc/nginx/sites-available/default > tmp
 mv tmp /etc/nginx/sites-available/default
-# service nginx start
+service nginx start
