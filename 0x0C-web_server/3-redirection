@@ -17,9 +17,12 @@ sudo ufw allow 'Nginx HTTP'
 # by modifying the default nginx landing page
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 
-# ++ Redirection- redirect /redirect_me page to sth else
+# ++ Redirection- redirect /redirect_me page to sth else;)
+other_place="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+line="rewrite ^/redirect_me/$ $other_place permanent;"
+file="/etc/nginx/sites-available/default"
+line_no=$(sed -n '/root \/var\/www\/html;/=' $file)
 
-other_place = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
-line = "rewrite ^/redirect_me$ $other_place permanent;"
-sed -i "/root /var/www/html/a\$line"
-service nginx start
+sed  "${line_no}a\\$line" /etc/nginx/sites-available/default > tmp
+sudo mv tmp /etc/nginx/sites-available/default
+sudo service nginx restart
