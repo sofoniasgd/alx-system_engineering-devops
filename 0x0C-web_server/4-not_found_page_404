@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 # sets up a new 404 error page
-sudo apt-get update
-sudo apt-get install -y nginx 
+
+# install nginx(enginex)
+sudo apt-get -y update
+sudo apt -y install nginx
+
+# configure firewall to allow normal unencrypted traffic
+# this opens only port 80
+sudo ufw allow 'Nginx HTTP'
+
+service nginx start
+
+# create a new page
 echo "Hello World!" > index.html
 sudo mv index.html /var/www/html
 
