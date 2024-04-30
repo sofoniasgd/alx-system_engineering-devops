@@ -1,27 +1,9 @@
 #!/usr/bin/env bash
-# Configure a new Ubuntu machine with Nginx installation
-# requirements:
-# 	install it on my web server
-#	it should listen on port 80
-# Http response should contain custom header
-# 	X-Served-By : hostname_of_server
-
-# install nginx(enginex)
-sudo apt-get -y update
-sudo apt -y install nginx
-
-# configure firewall to allow normal unencrypted traffic
-# this opens only port 80
-#sudo ufw allow 'Nginx HTTP'
-
-# find line number of "/root /var/www/html;" to add configuration data after
-file="/etc/nginx/sites-available/default"
-line_no=$(sed -n '/root \/var\/www\/html;/=' $file)
-
-# create a copy to avoid permission issues then replace
-line="add_header X-Served-By $hostname;"
-
-sed "${line_no}a\\$line" /etc/nginx/sites-available/default > tmp
-sudo mv tmp /etc/nginx/sites-available/default
-
-sudo service nginx restart
+# Script that configures Nginx server with a custom header
+apt-get -y update
+apt-get -y install nginx
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Tolulope05 permanent;\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}/" /etc/nginx/sites-available/default
+sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
+service nginx start
