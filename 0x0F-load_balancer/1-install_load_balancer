@@ -1,6 +1,29 @@
 #!/usr/bin/env bash
 # Setup a brand new Load Balancer using HAProxy
 
-# install HAProxy
-sudo apt install haproxy
+# install HAProxy for ubuntu 16.04 because thats the version the checker runs on
+apt-get -y install --no-install-recommends software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.0
 
+apt-get -y install haproxy=2.0.\*
+
+# We need to enable HAProxy to be started by the init script
+echo "ENABLED=1" >> /etc/default/haproxy
+
+# setup complete, now configure my two servers and dedicated load balancer
+
+# frontend and backend configuration text
+echo "
+frontend myfrontend
+	bind 127.0.0.1:80
+	mode http
+	default_backend mybackend
+backend mybackend
+	balance roundrobin
+	server web-01 52.3.240.162:8080 check
+	server web-02 100.25.140.102:8080 check
+" >> /etc/haproxy/haproxy.cfg
+
+
+# restart service
+service haproxy start

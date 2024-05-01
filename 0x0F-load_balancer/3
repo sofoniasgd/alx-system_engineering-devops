@@ -1,0 +1,8 @@
+stuff
+line one
+	line two
+	line three
+frontend myfrontend
+	bind *:80
+	mode http
+	default_backend mybackend

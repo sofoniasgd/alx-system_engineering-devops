@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+line="line one\n\tline two\n\tline three"
+sed "\$a\\$line" 1 > 2
+
