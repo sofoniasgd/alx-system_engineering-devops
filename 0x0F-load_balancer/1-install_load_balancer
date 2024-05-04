@@ -15,7 +15,7 @@ echo "ENABLED=1" >> /etc/default/haproxy
 # frontend and backend configuration text
 echo "
 frontend myfrontend
-	bind 127.0.0.1:80
+	bind *:80
 	mode http
 	default_backend mybackend
 backend mybackend
