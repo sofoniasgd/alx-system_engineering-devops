@@ -20,8 +20,8 @@ frontend myfrontend
 	default_backend mybackend
 backend mybackend
 	balance roundrobin
-	server web-01 52.3.240.162:80 check
-	server web-02 100.25.140.102:80 check
+	server 446554-web-01 52.3.240.162:80 check
+	server 446554-web-02 100.25.140.102:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 
