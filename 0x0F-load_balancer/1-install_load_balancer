@@ -8,23 +8,27 @@ add-apt-repository -y ppa:vbernat/haproxy-2.0
 apt-get -y install haproxy=2.0.\*
 
 # We need to enable HAProxy to be started by the init script
-sudo sed -i 's/ENABLED=0/ENABLED=1' /etc/default/haproxy
+sudo sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
 
 # setup complete, now configure my two servers and dedicated load balancer
 
 # frontend and backend configuration text
 echo "
-	bind *:80
-	mode http
-	balance roundrobin
-	option httpclose
-	option forwardfor
-	server 446554-web-01 52.3.240.162:80 check
-	server 446554-web-02 100.25.140.102:80 check
+frontend sofis_frontend
+        bind *:80
+        default_backend sofis_backend
+
+backend sofis_backend
+        balance roundrobin
+        server 446554-web-01 34.227.90.169:80 check
+        server 446554-web-02 54.160.121.251:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 # echo "added servers web-01 and web-02 in roundrobin configuration"
 
-
 # restart service
-service haproxy start
+if [ "$(pgrep -c haproxy)" -le 0 ]; then
+        sudo service haproxy start
+else
+        sudo service haproxy restart
+fi
