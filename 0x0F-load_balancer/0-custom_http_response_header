@@ -7,12 +7,12 @@
 # 	X-Served-By : hostname_of_server
 
 # install nginx(enginex)
-#sudo apt-get -y update
-#sudo apt -y install nginx
+sudo apt-get -y update
+sudo apt -y install nginx
 
 # configure firewall to allow normal unencrypted traffic
 # this opens only port 80
-#sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTP'
 
 # create a new page
 echo "Hello World!" > index.html
@@ -23,23 +23,27 @@ echo "Ceci n'est pas une page" > 404.html
 sudo mv 404.html /var/www/html
 
 # find line number of "/root /var/www/html;" to add configuration data after
-#file="/etc/nginx/sites-available/default"i
-file="testf"
+file="/etc/nginx/sites-available/default"
+tmp_string="testf"
 line_no=$(sed -n '/root \/var\/www\/html;/=' $file)
 
 # define configuration lines
-lines=$(cat <<EOF
-add_header X-Served-By $HOSTNAME;
-index index.html;
-location /redirect_me {
-	return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley;
-}
-EOF
-)
-echo $lines
+echo "
+	add_header X-Served-By $HOSTNAME;
+	index index.html;
+	location /redirect_me {
+		return 301 https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley;
+	}
+	error_page 404 /404.html;
+	location = /404.html{
+		internal;
+	}
+" > $tmp_string
+cat $tmp_string
 # create a copy to avoid permission issues then replace
-#sed "${line_no}a\\$lines" /etc/nginx/sites-available/default > tmp
-sed "${line_no}a\\$lines" testf
-#sudo mv tmp /etc/nginx/sites-available/default
+sed "${line_no}r $tmp_string" /etc/nginx/sites-available/default > tmpsed
+sudo mv tmpsed /etc/nginx/sites-available/default
 
-#sudo service nginx start
+rm "$tmp_string"
+
+sudo service nginx start
