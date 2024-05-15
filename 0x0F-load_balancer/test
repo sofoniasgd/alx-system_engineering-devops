@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
-line="line one\n\tline two\n\tline three"
-sed "\$a\\$line" 1 > 2
+echo "
+frontend sofis_frontend
+        bind *:80
+        default_backend sofis_backend
+
+backend sofis_backend
+        balance roundrobin
+        server 446554-web-01 34.227.90.169:80 check
+        server 446554-web-02 54.160.121.251:80 check
+" | sudo tee -a 1 >/dev/null
+
 
