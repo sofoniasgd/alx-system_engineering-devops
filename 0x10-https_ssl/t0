@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# World wide web(task 0) Display domain info
+
+domain="$1"
+subdomain="$2"
+
+
+
+if [ -n "$2" ]; then
+	# subdomain given so call function with it
+	echo "$2"
+else
+	# no subdomian given, check against all subdomains
+	echo "$1"
+fi
+
