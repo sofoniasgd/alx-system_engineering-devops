@@ -1,0 +1,12 @@
+# install flask using pip
+# Ensure python3-pip is installed
+package { 'python3-pip':
+  ensure => installed,
+  }
+
+# Install Flask using pip3
+package { 'flask':
+    ensure   => present,
+      provider => 'pip3',
+        require  => Package['python3-pip'],
+        }
