@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # runs the "whoami" command as a different user from argument
-runuser -l "$1" -c "whoami"
+sudo runuser -l "$1" -c "whoami"
