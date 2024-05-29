@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# create a mysql backup
+
+# use mysqldump to create the dump file
+mysqldump -u root -p"$1" tyrell_corp > backup.sql
+
+# compress the dql dump
+file="$(date +"%d-%m-%y")"
+tar -czvf "$file.tar.gz" backup.sql
