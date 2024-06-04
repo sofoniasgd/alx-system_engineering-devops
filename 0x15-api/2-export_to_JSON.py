@@ -26,6 +26,7 @@ if __name__ == "__main__":
     tasks_total = 0
     for task in task_list:
         if task['userId'] == int(user_id):
+            task_dict = {}
             # get username
             user = requests.get(url + "users/" + user_id).json()["username"]
             task_dict["task"] = task['title']
