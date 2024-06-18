@@ -10,7 +10,8 @@ def number_of_subscribers(subreddit):
     from the Reddit API
     """
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    response = requests.get(url, headers={'user_agent':'custom'})
+    response = requests.get(url, headers={'user_agent': 'custom'},
+                            allow_redirects=False)
     if (response.status_code == 200):
         # print(response.json())
         data = response.json()
