@@ -9,13 +9,12 @@ def number_of_subscribers(subreddit):
     (not active users, total subscribers)
     from the Reddit API
     """
-    url = "https://reddit.com/r/" + subreddit + "/about.json"
-    response = requests.get(url, allow_redirects=False)
-    # print(response.status_code)
-    if (response.status_code == 301 or 302):
-        return 0
-    elif response.status_code == 200:
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    response = requests.get(url, headers={'user_agent':'custom'})
+    if (response.status_code == 200):
         # print(response.json())
         data = response.json()
         subscriber_number = data['data']['subscribers']
         return subscriber_number
+    else:
+        return 0
