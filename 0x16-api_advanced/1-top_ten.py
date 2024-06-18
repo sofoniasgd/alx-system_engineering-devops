@@ -8,15 +8,11 @@ def top_ten(subreddit):
     """queries the first 10 'hot' posts
     from the Reddit API
     """
-    url = "https://reddit.com/r/" + subreddit + "/hot.json"
-    response = requests.get(url)
-    print(response.status_code)
-    if (response.status_code == 301 or 302):
-        return
-    elif response.status_code == 200:
-        print(response.json())
-        post_list = response.json()['chldren']
-        count = 0
-        for post in post_list and count < 10:
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
+                            params={'limit': 10},
+                            allow_redirects=False)
+    if response.status_code == 200:
+        post_list = response.json()['data']['children']
+        for post in post_list:
             print(post['data']['title'])
-            count += 1
