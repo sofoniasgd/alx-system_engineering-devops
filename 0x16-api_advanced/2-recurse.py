@@ -11,11 +11,11 @@ def recurse(subreddit, hot_list=[], after=""):
     """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     if after != "":
-        params['after'] = after
+         response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
+                            params={"after": after},
+                            allow_redirects=False)
     else:
-        params = {}
-    response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
-                            params=params,
+        response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
                             allow_redirects=False)
     if response.status_code == 200:
         # check if there are no more items to retrieve
@@ -24,11 +24,13 @@ def recurse(subreddit, hot_list=[], after=""):
 
         # parse and add titles to list
         post_list = response.json()['data']['children']
+        print(response.status_code)
         for post in post_list:
             hot_list.append(post['data']['title'])
         # call function with after parameter
         print("before next call=", len(hot_list))
         recurse(subreddit, hot_list, response.json()['data']['after'])
+        return hot_list
     else:
         print("None")
         exit()
