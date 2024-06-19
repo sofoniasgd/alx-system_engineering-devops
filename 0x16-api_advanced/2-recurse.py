@@ -12,11 +12,12 @@ def recurse(subreddit, hot_list=[], after=""):
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     if after != "":
         response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
-                                params={"after": after},
+                                params={"after": after, "limit": 1},
                                 allow_redirects=False)
     else:
         response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
-                                allow_redirects=False)
+                                 params={"limit": 1},
+                                 allow_redirects=False)
     if response.status_code == 200:
 
         # parse and add titles to list
