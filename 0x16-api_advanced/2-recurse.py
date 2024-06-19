@@ -11,26 +11,25 @@ def recurse(subreddit, hot_list=[], after=""):
     """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     if after != "":
-         response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
-                            params={"after": after},
-                            allow_redirects=False)
+        response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
+                                params={"after": after},
+                                allow_redirects=False)
     else:
         response = requests.get(url, headers={'User_Agent': 'sofi_vm'},
-                            allow_redirects=False)
+                                allow_redirects=False)
     if response.status_code == 200:
-        # check if there are no more items to retrieve
-        if {response.json()['data']['after'] == None}:
-            return
 
         # parse and add titles to list
         post_list = response.json()['data']['children']
-        print(response.status_code)
+        # print(response.status_code)
         for post in post_list:
             hot_list.append(post['data']['title'])
+        # check if there are no more items to retrieve
+        after = response.json()['data']['after']
+        if after is None:
+            return hot_list
         # call function with after parameter
-        print("before next call=", len(hot_list))
-        recurse(subreddit, hot_list, response.json()['data']['after'])
+        recurse(subreddit, hot_list, after)
         return hot_list
     else:
-        print("None")
         exit()
