@@ -8,5 +8,6 @@
 # grep gunicorn: Filters processes containing "gunicorn".
 # awk '{ print $2 }': Extracts the second column (PID) from the ps output.
 # xargs kill -HUP: Passes each PID to kill with the HUP signal for graceful reload.
-pgrep gunicorn | xargs kill -HUP
+PID=$(pgrep gunicorn)
+kill -s HUP $((PID))
 
