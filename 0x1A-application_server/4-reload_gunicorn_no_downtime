@@ -3,10 +3,10 @@
 # v1
 # sudo systemctl reload gunicorn
 
-# v2 
+# v2
 # ps aux: Lists all running processes.
 # grep gunicorn: Filters processes containing "gunicorn".
 # awk '{ print $2 }': Extracts the second column (PID) from the ps output.
 # xargs kill -HUP: Passes each PID to kill with the HUP signal for graceful reload.
-ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
+pgrep gunicorn | xargs kill -HUP
 
